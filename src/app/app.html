@@ -1,9 +1,40 @@
 <main>
-    <input type="text" data-ng-model="nombre">
-    <h1 class="title">Hello {{nombre}} !</h1>
-    <!-- Images (and assets) are parsed and loaded from within the public directory -->
-    <img src="/img/logo.png" data-ng-click="hey()">
+    <section class="home">
+        <header class="header">
+            <h1>
+                <small>Welcome to</small>
+                <span>Spotisearch</span>
+            </h1>
+            <p>
+                Search your favourite songs over Spotify, just entern an artist's name in the following search box and enjoy!
+            </p>
+        </header>
+        <aside data-ng-controller="SearchCtrl" class="buscador">
+            <form action="buscador--form">
+                <button class="buscador--btn"></button>
+                <input type="search" name="q" id="" placeholder="Search for your favorite artist here" class="buscador--input">
+            </form>
+        </aside>
+    </section>
+    <section class="favorite-songs" data-ng-controller="FavoriteSongsCtrl">
+        <h1>Favorite songs</h1>
+        <div class="favorite-songs--container">
+            <div class="preview" data-ng-repeat="song in favoriteSongs">
+                <figure class="preview--wrap">
+                    <img ng-src="{{song.album.images[2].url}}" alt="{{song.album.name}}">
+                    <figcaption class="preview--descripcion">
+                        <h3 class="preview--titulo">{{song.name}}</h3>
+                        <!-- Descripciones alternas -->
+                        <dl class="preview__lista">
+                            <dt>Artist:</dt>
+                            <dd>{{song.artists[0].name}}</dd>
+                            <dt>Album:</dt>
+                            <dd>{{song.album.name}}</dd>
+                        </dl>
+                        <!-- Fin Descripciones alternas -->
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
 </main>
-<footer>
-    <a ng-href="{{app.url}}">Webpack Angular Starter</a>
-</footer>

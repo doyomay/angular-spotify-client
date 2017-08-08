@@ -1,37 +1,7 @@
-import angular from 'angular';
-
-import '../style/normalize.css';
-import '../style/app.css';
-
-let app = () => {
-    return {
-        template: require('./app.html'),
-        controller: 'AppCtrl',
-        controllerAs: 'app'
-    }
-};
-
-class AppCtrl {
-    constructor($scope) {
-        $scope.nombre = "";
-        $scope.hey = () => {
-            alert($scope.nombre);
-        }
-    }
-}
-
-class SearchCtrl {
-    constructor($scope) {
-        $scope.nombre = "";
-        $scope.hey = () => {
-            alert($scope.nombre);
-        }
-    }
-}
-
-class FavoriteSongsCtrl {
-    constructor($scope) {
-        $scope.favoriteSongs = [{
+{
+    "tracks": {
+        "href": "https://api.spotify.com/v1/search?query=gorillaz+melancholy&type=track&market=MX&offset=0&limit=20",
+        "items": [{
             "album": {
                 "album_type": "album",
                 "artists": [{
@@ -351,16 +321,11 @@ class FavoriteSongsCtrl {
             "track_number": 4,
             "type": "track",
             "uri": "spotify:track:3zMuYsJNafYYZrAbRRuXgJ"
-        }];
+        }],
+        "limit": 20,
+        "next": null,
+        "offset": 0,
+        "previous": null,
+        "total": 5
     }
 }
-
-const MODULE_NAME = 'app';
-
-angular.module(MODULE_NAME, [])
-    .directive('app', app)
-    .controller('AppCtrl', AppCtrl)
-    .controller('SearchCtrl', SearchCtrl)
-    .controller('FavoriteSongsCtrl', FavoriteSongsCtrl);
-
-export default MODULE_NAME;
