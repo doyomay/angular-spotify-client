@@ -1,0 +1,17 @@
+<main role="main" class="artista">
+    <section class="container">
+        <header class="artista--header">
+            <figure class="logo"><img src="" alt=""></figure>
+            <app-search placeholder="Search for another artist"></app-search>
+        </header>
+    </section>
+    <section class="container">
+        <h1>{{artist.name}}</h1>
+        <figure>
+            <img ng-src="{{artist.images[1].url}}" alt="">
+            <figcaption>
+                <h2>{{artist.genres[0]}}</h2>
+            </figcaption>
+        </figure>
+    </section>
+</main>
