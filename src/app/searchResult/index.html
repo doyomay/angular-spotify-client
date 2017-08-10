@@ -1,0 +1,18 @@
+<main>
+    <section class="container">
+        <figure class="text-center">
+            <img src="" alt="">
+        </figure>
+        <header>
+            <h1>Artists</h1>
+            <p>You are currently search: <span>"{{query}}"</span></p>
+            <app-search></app-search>
+        </header>
+    </section>
+    <section>
+        <app-breadcrumb></app-breadcrumb>
+    </section>
+    <div class="container">
+        <section class="list-search-results" data-ng-include="'/views/preview.html'"> </section>
+    </div>
+</main>
