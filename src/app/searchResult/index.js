@@ -4,11 +4,12 @@ class SearchResultListCtrl {
     constructor($scope, $location, $http) {
         $scope.songs = [];
         $scope.nombre = "Este es un nombre";
+        $scope.placeholder = "prueba";
         var searchObject = $location.search();
         $scope.query = searchObject.q;
         $http.get('https://api.spotify.com/v1/search?q=' + $scope.query + '&type=artist', {
             headers: {
-                'Authorization': 'Bearer BQD60LCJSNhK3QTEIpG9S3xf9HOxjRx0cblOKNo3Dk_8fFaYeW_mdEXsIL-GqaHqvvm8Njt3pgFeIcD16ZCgb_ksRONDV6EIC5hzUGirI5jwpAZmJiyzTtBWd6k2YL9demEGIaeMXVBs3rQ'
+                'Authorization': 'Bearer BQDjrqTpXqb-PeV7mVce9CwMc-hgLVuWCaWubGv23yBcAFLzAT8e_xwd8OGYcpJpknN_R9bRTwoQzPb7JGCR-8uJ9Qvu5Cqc3hgp2JRE_1-W83LCZZgavJ4qS3JZKMkHJaVE4OVyvdEf7Mg'
             },
         }).then((response) => {
             $scope.songs = response.data.artists.items;

@@ -6,11 +6,11 @@
         <header>
             <h1>Artists</h1>
             <p>You are currently search: <span>"{{query}}"</span></p>
-            <app-search></app-search>
+            <app-search placeholder="search for your favorite artist here"></app-search>
         </header>
     </section>
     <section>
-        <app-breadcrumb></app-breadcrumb>
+        <app-breadcrumb breadcrumb="[{name:'artista',url:'/artista/123123123'}]"></app-breadcrumb>
     </section>
     <div class="container">
         <section class="list-search-results" data-ng-include="'/views/preview.html'"> </section>
