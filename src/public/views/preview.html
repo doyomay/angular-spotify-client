@@ -4,10 +4,10 @@
         <img class="preview--image" ng-switch-when="album" ng-src="{{song.images[2].url}}" alt="{{song.album.name}}">
         <img class="preview--image" ng-switch-default ng-src="{{song.album.images[2].url}}" alt="{{song.album.name}}">
         <figcaption class="preview--descripcion">
-            <a ng-switch-when="album" ng-href="/album/{{song.id}}">
+            <a ng-switch-when="album" href="/album/{{song.id}}">
                 <h3 class="preview--titulo"> {{song.name}}</h3>
             </a>
-            <a ng-switch-when="artist" ng-href="/artist/{{song.id}}">
+            <a ng-switch-when="artist" href="/artist/{{song.id}}">
                 <h3 class="preview--titulo"> {{song.name}}</h3>
             </a>
             <!-- Descripciones alternas -->

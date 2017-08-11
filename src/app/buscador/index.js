@@ -1,9 +1,9 @@
 class SearchCtrl {
-    constructor($scope) {
+    constructor($scope, $location) {
         $scope.artista = "";
-        $scope.placeholder = 'Sarch for your favorite artist here';
+        $scope.placeholder = 'Search for your favorite artist here';
         $scope.buscador = () => {
-            console.log($scope.artista);
+            $location.path('/search').search({ q: $scope.artista });
         }
     }
 }

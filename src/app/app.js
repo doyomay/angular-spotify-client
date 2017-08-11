@@ -33,7 +33,7 @@ class AppCtrl {
 let SpotifyFactory = ($http) => {
     let methods = {};
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQCwuFf4CWPGPxeaQkFeNXBe9xQz0aMVFUobkvj0s1XDcQtg0qUpO0zpGrYiZKdsvtBSCToYa3i83NrRbmq9N5OAoJjRuY-j9AHSunCELoclWdP1QG_HGKHNulVa7nqBg8soEPBpS1lSRis';
+    $http.defaults.headers.common.Authorization = 'Bearer BQAOW_9RHXo8xHKWdb0WrT5fbv5yFnyj_99OuZ4rXKRnzAVVRR12ImjCnATiEulBPnLWjtozEaDoRo2y7phXsIsBEgmWW1uYD2YKg0Xvsg8Z4osWWDl5Gb5MazF0oQN-C4BqNc3C6yVjqFc';
     methods = {
         search: function(query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');
@@ -48,6 +48,19 @@ let SpotifyFactory = ($http) => {
             return $http.get(url + 'albums/' + idAlbum);
         },
     };
+    return methods;
+}
+
+let WebPlayerFactory = () => {
+    const AUDIO_PLAYER = document.getElementById('webPlayer');
+    let methods = {
+        setAudio: (src) => {
+            AUDIO_PLAYER.pause();
+            AUDIO_PLAYER.autoplay = true;
+            AUDIO_PLAYER.src = src;
+            AUDIO_PLAYER.load();
+        }
+    }
     return methods;
 }
 
@@ -75,6 +88,7 @@ angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips'])
             });
     }])
     .factory('SpotifyFactory', SpotifyFactory)
+    .factory('WebPlayerFactory', WebPlayerFactory)
     .directive('app', app)
     .directive('appSearch', searchDirective)
     .directive('appFavoriteSongs', favoriteSongsDirective)

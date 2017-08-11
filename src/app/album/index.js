@@ -1,9 +1,10 @@
 import './style.scss';
 class AlbumCtrl {
-    constructor($scope, $routeParams, SpotifyFactory) {
+    constructor($scope, $routeParams, SpotifyFactory, WebPlayerFactory) {
         $scope.query = $routeParams.albumId;
         $scope.data = {};
         $scope.tracks = [];
+        $scope.reproducir = (track) => { WebPlayerFactory.setAudio(track.preview_url) };
         $scope.artist = {
             name: "",
             name: "",

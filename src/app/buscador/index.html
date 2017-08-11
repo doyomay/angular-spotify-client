@@ -1,6 +1,6 @@
-<aside class="buscador">
-    <form class="buscador--form" action="search">
+<aside class="buscador" ng-controller="SearchCtrl">
+    <form class="buscador--form" ng-submit="buscador()">
         <button class="buscador--btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-        <input type="search" required ngKeyup="buscador(artista)" data-ng-model="artista" name="q" id="" placeholder="{{placeholder}}" class="buscador--input">
+        <input type="search" required data-ng-model="artista" name="q" id="" placeholder="{{placeholder}}" class="buscador--input">
     </form>
 </aside>
