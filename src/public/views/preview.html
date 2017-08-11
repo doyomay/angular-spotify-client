@@ -1,18 +1,26 @@
-<div class="preview" data-ng-repeat="song in songs">
+<div class="preview" ng-repeat="song in songs">
     <figure class="preview--wrap" ng-switch on="song.type">
         <img class="preview--image" ng-switch-when="artist" ng-src="{{song.images[2].url}}" alt="{{song.album.name}}">
+        <img class="preview--image" ng-switch-when="album" ng-src="{{song.images[2].url}}" alt="{{song.album.name}}">
         <img class="preview--image" ng-switch-default ng-src="{{song.album.images[2].url}}" alt="{{song.album.name}}">
         <figcaption class="preview--descripcion">
-            <a ng-href="/artist/{{song.id}}">
+            <a ng-switch-when="album" ng-href="/album/{{song.id}}">
+                <h3 class="preview--titulo"> {{song.name}}</h3>
+            </a>
+            <a ng-switch-when="artist" ng-href="/artist/{{song.id}}">
                 <h3 class="preview--titulo"> {{song.name}}</h3>
             </a>
             <!-- Descripciones alternas -->
-            <dl class="preview__lista" ng-if="song.type == 'track'">
+            <dl class="preview__lista" ng-switch-when="album">
+                <dd>{{song.artists[0].name}}</dd>
+            </dl>
+            <dl class="preview__lista" ng-switch-default>
                 <dt>Artist:</dt>
                 <dd>{{song.artists[0].name}}</dd>
                 <dt>Album:</dt>
                 <dd>{{song.album.name}}</dd>
             </dl>
+
             <!-- Fin Descripciones alternas -->
         </figcaption>
     </figure>

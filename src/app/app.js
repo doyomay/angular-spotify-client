@@ -31,14 +31,17 @@ class AppCtrl {
 let SpotifyFactory = ($http) => {
     let methods = {};
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQBed0sZY4p23-RSm2nvgCCOSdsvpsjYpJhO-yQ1ZndFhdCTKv0pqJJzJzXY5MBAc7iZomSipq4gkNpRgUlzZ-BqSiFVG2gTrGB_tMiezyMjZrL8A7Igi_syihQRbww9RT5yDssTw2nOW8Q';
+    $http.defaults.headers.common.Authorization = 'Bearer BQBml3TA9EJUR4bhnmn8IeIKihqu_YH-zIQxgFpeKrznFd5GBk-Tpx6IWEfJ39VdKkyv3QuTrVQC7ibmp7sRsW1B49SoYGZGfeKNMKl-742FKyP5r6-LiEDNtO0EZj8LGskQf5wok987PTA';
     methods = {
         search: function(query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');
         },
         getArtist: function(idArtist) {
             return $http.get(url + 'artists/' + idArtist);
-        }
+        },
+        getAlbumsArtist: function(idArtist) {
+            return $http.get(url + 'artists/' + idArtist + '/albums');
+        },
     };
     return methods;
 }
