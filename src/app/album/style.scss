@@ -27,4 +27,9 @@ $padding-album: 7px;
         font-size: 1em;
         margin: 0;
     }
+    &--start {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }

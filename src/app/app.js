@@ -1,4 +1,5 @@
 import angular from 'angular';
+import 'angular-tooltips';
 import ngRoute from 'angular-route';
 import '../style/normalize.css';
 import SearchCtrl from './buscador';
@@ -52,7 +53,7 @@ let SpotifyFactory = ($http) => {
 
 const MODULE_NAME = 'app';
 
-angular.module(MODULE_NAME, ['ngRoute'])
+angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips'])
     .config(["$routeProvider", "$locationProvider", ($routeProvider, $locationProvider) => {
         $locationProvider.html5Mode(true);
         $routeProvider
