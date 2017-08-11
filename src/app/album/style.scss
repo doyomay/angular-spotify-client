@@ -1,0 +1,30 @@
+$bck-album-header:#505050;
+$padding-album: 7px;
+.album {
+    width: 100%;
+    &--header {
+        padding: $padding-album;
+        background-color: $bck-album-header;
+        h2 {
+            color: #FFF;
+            margin: 0;
+        }
+    }
+    &--listado {
+        padding-left: 0;
+        margin: 0;
+    }
+}
+
+.album__track {
+    list-style: none;
+    padding: 3px $padding-album;
+    &:nth-child(odd) {
+        background-color: lighten($bck-album-header, 20);
+        color: #FFF;
+    }
+    &--title {
+        font-size: 1em;
+        margin: 0;
+    }
+}

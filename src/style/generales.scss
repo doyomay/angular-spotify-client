@@ -20,3 +20,16 @@ main {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.flex {
+    display: flex;
+}
+
+.flex--center {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex--top {
+    align-content: flex-start;
+}

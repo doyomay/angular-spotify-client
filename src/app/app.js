@@ -8,6 +8,7 @@ import favoriteSongsDirective from './favoriteSongs/favoriteSongsDirective';
 
 import SearchResultListCtrl from './searchResult';
 import ArtistaCtrl from './artista';
+import AlbumCtrl from './album';
 import '../style/app.scss';
 
 let app = () => {
@@ -31,7 +32,7 @@ class AppCtrl {
 let SpotifyFactory = ($http) => {
     let methods = {};
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQBml3TA9EJUR4bhnmn8IeIKihqu_YH-zIQxgFpeKrznFd5GBk-Tpx6IWEfJ39VdKkyv3QuTrVQC7ibmp7sRsW1B49SoYGZGfeKNMKl-742FKyP5r6-LiEDNtO0EZj8LGskQf5wok987PTA';
+    $http.defaults.headers.common.Authorization = 'Bearer BQCwuFf4CWPGPxeaQkFeNXBe9xQz0aMVFUobkvj0s1XDcQtg0qUpO0zpGrYiZKdsvtBSCToYa3i83NrRbmq9N5OAoJjRuY-j9AHSunCELoclWdP1QG_HGKHNulVa7nqBg8soEPBpS1lSRis';
     methods = {
         search: function(query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');
@@ -41,6 +42,9 @@ let SpotifyFactory = ($http) => {
         },
         getAlbumsArtist: function(idArtist) {
             return $http.get(url + 'artists/' + idArtist + '/albums');
+        },
+        getTracksAlbum: function(idAlbum) {
+            return $http.get(url + 'albums/' + idAlbum);
         },
     };
     return methods;
@@ -63,6 +67,10 @@ angular.module(MODULE_NAME, ['ngRoute'])
             .when("/artist/:artistId", {
                 template: require('./artista/index.html'),
                 controller: 'ArtistaCtrl',
+            })
+            .when("/album/:albumId", {
+                template: require('./album/index.html'),
+                controller: 'AlbumCtrl',
             });
     }])
     .factory('SpotifyFactory', SpotifyFactory)
@@ -73,6 +81,7 @@ angular.module(MODULE_NAME, ['ngRoute'])
     .controller('SearchCtrl', SearchCtrl)
     .controller('SearchResultCtrl', SearchResultListCtrl)
     .controller('FavoriteSongsCtrl', FavoriteSongsCtrl)
-    .controller('ArtistaCtrl', ArtistaCtrl);
+    .controller('ArtistaCtrl', ArtistaCtrl)
+    .controller('AlbumCtrl', AlbumCtrl);
 
 export default MODULE_NAME;
