@@ -32,18 +32,18 @@ class AppCtrl {
 
 let SpotifyFactory = ($http) => {
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQDfJWd_z3N83VyJq1wbOeTJJZjTvoS-32Sx_5nepRdz-YpUtGlFFbdMVRK3DHeU_gGQCLNR27Eh6j8REPy9FudKihqtGOz-b262fM2R16hz2zzOmE7fYjcGYsQ00I8VWIqbKWj6KXTmTj0';
+    $http.defaults.headers.common.Authorization = 'Bearer BQDg555p_DvwCbkWtHaSL2XVjJcAqodiDadEIy3td3biEyHv7Yin3r6943LcM3oZfuoGLjihyejl4_Y1a8zzzlz-Q_tMANX2IE2W3fzOil8_e9DpMs0xXMYV2wLY1EU3t8H2Z9dhJZImuzc';
     return {
-        search: function (query) {
+        search: function(query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');
         },
-        getArtist: function (idArtist) {
+        getArtist: function(idArtist) {
             return $http.get(url + 'artists/' + idArtist);
         },
-        getAlbumsArtist: function (idArtist) {
+        getAlbumsArtist: function(idArtist) {
             return $http.get(url + 'artists/' + idArtist + '/albums');
         },
-        getTracksAlbum: function (idAlbum) {
+        getTracksAlbum: function(idAlbum) {
             return $http.get(url + 'albums/' + idAlbum);
         },
     };

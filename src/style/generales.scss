@@ -1,24 +1,46 @@
+figure {
+    margin: 0;
+}
+
 main {
     padding: 0;
     margin-top: 50px;
     display: block;
 }
 
-.container {
+.img-responsive {
     display: block;
-    width: 100%;
-    max-width: 900px;
+    max-width: 100%;
+    height: auto;
+}
+
+@mixin center-block {
+    display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-.container-fluid {
-    display: block;
+.center-block {
+    @include center-block;
+}
+
+.center-block-xs {
+    @media screen and (max-width: 767px) {
+        @include center-block;
+    }
+}
+
+.container {
+    @extend .center-block;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 900px;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.container-fluid {
+    @extend .container;
+    width: 100%;
 }
 
 .flex {
