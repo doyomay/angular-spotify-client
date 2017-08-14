@@ -1,22 +1,21 @@
 <main role="main" class="artista">
-    <section class="container">
+    <section class="container-fluid">
         <header class="artista--header">
             <app-logo></app-logo>
             <app-search placeholder="Search for another artist"></app-search>
         </header>
     </section>
     <section class="container">
-        <h1>{{data.name}}</h1>
-        <figure class="flex flex--top">
+        <figure class="artista--descripcion">
             <img class="img-responsive" ng-src="{{data.images[1].url}}" alt="">
             <figcaption>
+                <h1>{{data.name}}</h1>
                 <h2>{{data.artists[0].name}}</h2>
             </figcaption>
         </figure>
     </section>
     <section class="container">
         <div class="favorite-songs--container">
-
             <article class="album">
                 <header class="album--header">
                     <h2>Disc 1</h2>

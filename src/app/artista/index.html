@@ -1,16 +1,16 @@
 <main role="main" class="artista">
-    <section class="container">
+    <section class="container-fluid">
         <header class="artista--header">
             <app-logo></app-logo>
             <app-search placeholder="Search for another artist"></app-search>
         </header>
     </section>
     <section class="container">
-        <h1>{{artist.name}}</h1>
-        <figure>
-            <img class="img-responsive" ng-src="{{artist.images[1].url}}" alt="">
+        <figure class="artista--descripcion">
+            <img class="img-responsive" ng-src="{{artist.images[2].url}}" alt="{{artist.name}}">
             <figcaption>
-                <h2>{{artist.genres[0]}}</h2>
+                <h1>{{artist.name}}</h2>
+                    <h2>{{artist.genres[0]}}</h1>
             </figcaption>
         </figure>
     </section>

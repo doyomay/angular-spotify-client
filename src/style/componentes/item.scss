@@ -4,10 +4,21 @@
     margin-bottom: 15px;
     &--titulo {
         margin: 0;
-        line-height: 10px;
+        font-size: 1em;
     }
     &--descripcion {
-        width: auto;
+        flex-grow: 1;
+        >a {
+            color: #000;
+            text-decoration: none;
+            transition: .2s all ease;
+            &:hover,
+            &:visited,
+            &:active,
+            &:focus {
+                color: darken($color-brand, 5);
+            }
+        }
     }
     &--image {
         width: 64px;
