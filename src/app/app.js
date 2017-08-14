@@ -1,17 +1,23 @@
 import angular from 'angular';
 import 'angular-tooltips';
 import ngRoute from 'angular-route';
+
+//Styles
 import '../style/normalize.css';
-import SearchCtrl from './buscador';
+import '../style/app.scss';
+
+//Directives
 import logoDirective from './logo';
+import breadcrumbDirective from './breadcrumb/breadcrumbDirective';
 import searchDirective from './buscador/buscadorDirective';
-import FavoriteSongsCtrl from './favoriteSongs';
 import favoriteSongsDirective from './favoriteSongs/favoriteSongsDirective';
 
+//Controllers
+import FavoriteSongsCtrl from './favoriteSongs';
+import SearchCtrl from './buscador';
 import SearchResultListCtrl from './searchResult';
 import ArtistaCtrl from './artista';
 import AlbumCtrl from './album';
-import '../style/app.scss';
 
 let app = () => {
     return {
@@ -33,7 +39,7 @@ class AppCtrl {
 
 let SpotifyFactory = ($http) => {
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQDhaXhRiBNx5wOxVCG3yYYjnudTyhl52DUbNBnNxG7L3_hB0psR2iePGXTHoKIwRVMthJAHHdHc9YtsV4t68bHqfdEeVv2OZkK_8rrLwKP4YoBDMm-PnWF3auF0QQaKhYqID7LAi-w2lDw';
+    $http.defaults.headers.common.Authorization = 'Bearer BQBR3LL24ShtCjRkuxAfD6x1quYNbV7vpvXYVgG4eDJ1SXDrkmH8adDypRZJ_gm6iD0nsgKS3c0qXmy9RQuohwP-wmjLKz9lF-621ipsYTd8e_goztrO_V50BpGt3rQCLTi8UhUR77_GgEw';
     return {
         search: function(query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');
@@ -88,6 +94,7 @@ angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips'])
     .factory('SpotifyFactory', SpotifyFactory)
     .factory('WebPlayerFactory', WebPlayerFactory)
     .directive('app', app)
+    .directive('breadcrumb', breadcrumbDirective)
     .directive('appLogo', logoDirective)
     .directive('appSearch', searchDirective)
     .directive('appFavoriteSongs', favoriteSongsDirective)
