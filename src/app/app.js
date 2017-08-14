@@ -31,29 +31,27 @@ class AppCtrl {
 }
 
 let SpotifyFactory = ($http) => {
-    let methods = {};
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQAOW_9RHXo8xHKWdb0WrT5fbv5yFnyj_99OuZ4rXKRnzAVVRR12ImjCnATiEulBPnLWjtozEaDoRo2y7phXsIsBEgmWW1uYD2YKg0Xvsg8Z4osWWDl5Gb5MazF0oQN-C4BqNc3C6yVjqFc';
-    methods = {
-        search: function(query) {
+    $http.defaults.headers.common.Authorization = 'Bearer BQDfJWd_z3N83VyJq1wbOeTJJZjTvoS-32Sx_5nepRdz-YpUtGlFFbdMVRK3DHeU_gGQCLNR27Eh6j8REPy9FudKihqtGOz-b262fM2R16hz2zzOmE7fYjcGYsQ00I8VWIqbKWj6KXTmTj0';
+    return {
+        search: function (query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');
         },
-        getArtist: function(idArtist) {
+        getArtist: function (idArtist) {
             return $http.get(url + 'artists/' + idArtist);
         },
-        getAlbumsArtist: function(idArtist) {
+        getAlbumsArtist: function (idArtist) {
             return $http.get(url + 'artists/' + idArtist + '/albums');
         },
-        getTracksAlbum: function(idAlbum) {
+        getTracksAlbum: function (idAlbum) {
             return $http.get(url + 'albums/' + idAlbum);
         },
     };
-    return methods;
-}
+};
 
 let WebPlayerFactory = () => {
     const AUDIO_PLAYER = document.getElementById('webPlayer');
-    let methods = {
+    return {
         setAudio: (src) => {
             AUDIO_PLAYER.pause();
             AUDIO_PLAYER.autoplay = true;
@@ -61,8 +59,7 @@ let WebPlayerFactory = () => {
             AUDIO_PLAYER.load();
         }
     }
-    return methods;
-}
+};
 
 const MODULE_NAME = 'app';
 

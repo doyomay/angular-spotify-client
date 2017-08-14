@@ -3,7 +3,7 @@ class SearchCtrl {
         $scope.artista = "";
         $scope.placeholder = 'Search for your favorite artist here';
         $scope.buscador = () => {
-            $location.path('/search').search({ q: $scope.artista });
+            $location.path('/search').search({q: $scope.artista});
         }
     }
 }
