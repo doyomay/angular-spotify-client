@@ -26,7 +26,7 @@
                 <ul class="album--listado">
                     <li class="album__track flex flex--center" ng-repeat="track in tracks.items">
                         <h2 class="album__track--title" ng-click="reproducir(track)">{{track.name}}</h2>
-                        <span class="album__track--start" tooltips tooltip-template="Add favorites" tooltip-side="right">
+                        <span class="album__track--start" ng-click="favoriteSong(track)" tooltips tooltip-template="Add favorites" tooltip-side="right">
                             <i class="fa fa-star" aria-hidden="true" ></i>
                         </span>
                     </li>

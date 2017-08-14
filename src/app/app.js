@@ -1,6 +1,7 @@
 import angular from 'angular';
 import 'angular-tooltips';
 import ngRoute from 'angular-route';
+import 'angular-locker';
 
 //Styles
 import '../style/normalize.css';
@@ -37,9 +38,11 @@ class AppCtrl {
     }
 }
 
+//directives
+
 let SpotifyFactory = ($http) => {
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQBR3LL24ShtCjRkuxAfD6x1quYNbV7vpvXYVgG4eDJ1SXDrkmH8adDypRZJ_gm6iD0nsgKS3c0qXmy9RQuohwP-wmjLKz9lF-621ipsYTd8e_goztrO_V50BpGt3rQCLTi8UhUR77_GgEw';
+    $http.defaults.headers.common.Authorization = 'Bearer BQDFVNHeoDJj-QzImJp6OcSP_ydsOtg5e07KTBAgVfuPBq5Cd1Q42W60OMpfS6yPIYxRdMmEzY-EWV2a-InC2EIMP_U6jLLk6VTR5ZZbYlEd8o0W3FaHPlwoHyquZKUb-iydnRRC1zXUhrA';
     return {
         search: function(query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');
@@ -70,7 +73,7 @@ let WebPlayerFactory = () => {
 
 const MODULE_NAME = 'app';
 
-angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips'])
+angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips', 'angular-locker'])
     .config(["$routeProvider", "$locationProvider", ($routeProvider, $locationProvider) => {
         $locationProvider.html5Mode(true);
         $routeProvider
