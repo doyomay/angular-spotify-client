@@ -1,6 +1,5 @@
 import './style.scss';
 class AlbumCtrl {
-    /*@ngInject;*/
     constructor($scope, $routeParams, SpotifyFactory, WebPlayerFactory) {
         $scope.query = $routeParams.albumId;
         $scope.data = {};

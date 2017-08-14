@@ -1,0 +1,7 @@
+@import '../../style/variables.scss';
+.logo {
+    >a>i {
+        font-size: 50px;
+        color: $color-brand;
+    }
+}

@@ -1,0 +1,17 @@
+.artista {
+    &--header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        app-search {
+            max-width: 50%;
+            flex-grow: 1;
+        }
+        @media screen and (max-width: 767px) {
+            flex-direction: column;
+            app-search {
+                max-width: 100%;
+            }
+        }
+    }
+}

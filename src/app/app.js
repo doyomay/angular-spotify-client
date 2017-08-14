@@ -3,6 +3,7 @@ import 'angular-tooltips';
 import ngRoute from 'angular-route';
 import '../style/normalize.css';
 import SearchCtrl from './buscador';
+import logoDirective from './logo';
 import searchDirective from './buscador/buscadorDirective';
 import FavoriteSongsCtrl from './favoriteSongs';
 import favoriteSongsDirective from './favoriteSongs/favoriteSongsDirective';
@@ -32,7 +33,7 @@ class AppCtrl {
 
 let SpotifyFactory = ($http) => {
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQDg555p_DvwCbkWtHaSL2XVjJcAqodiDadEIy3td3biEyHv7Yin3r6943LcM3oZfuoGLjihyejl4_Y1a8zzzlz-Q_tMANX2IE2W3fzOil8_e9DpMs0xXMYV2wLY1EU3t8H2Z9dhJZImuzc';
+    $http.defaults.headers.common.Authorization = 'Bearer BQBeAc8Gsi2HNpDdSsdks_hFCBO0znhxsg7z9LTcQ3f84wsRShn6EOKWE6JMzRgjPkuKXEAqMAlqO8LOMxhsg_NIPcBEwhs5g4__YppPYzBXprYbRoC16eQD2726zZ3SF2Z_GIVYcg48qa0';
     return {
         search: function(query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');
@@ -87,6 +88,7 @@ angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips'])
     .factory('SpotifyFactory', SpotifyFactory)
     .factory('WebPlayerFactory', WebPlayerFactory)
     .directive('app', app)
+    .directive('appLogo', logoDirective)
     .directive('appSearch', searchDirective)
     .directive('appFavoriteSongs', favoriteSongsDirective)
     .controller('AppCtrl', AppCtrl)
