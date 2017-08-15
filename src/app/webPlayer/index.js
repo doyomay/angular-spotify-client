@@ -16,7 +16,6 @@ class WebPlayerCtrl {
         WP.addEventListener('emptied', () => {
             let track = WebPlayerFactory.getTrackInfo();
             progressAudio.value = 0;
-            //progressAudio.max = track.duration_ms * 0.001;
             $scope.duration = {
                 init: 0,
                 end: 30000

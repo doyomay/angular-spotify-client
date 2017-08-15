@@ -47,6 +47,7 @@
         align-items: center;
         flex-direction: column;
         align-content: center;
+        margin: 0 10px;
     }
     &__progress {
         width: 100%;
@@ -88,5 +89,30 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    @media screen and (max-width:992px) {
+        &__volumen-container {
+            max-width: 150px;
+        }
+    }
+    @media screen and (max-width: 767px) {
+        flex-direction: column;
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+        &--left,
+        &--center,
+        &__volumen-container {
+            width: 100%;
+        }
+        &--left,
+        &--center {
+            margin-bottom: 10px;
+        }
+        &--left,
+        &__volumen-container {
+            max-width: 100%;
+            justify-content: flex-start;
+        }
     }
 }
