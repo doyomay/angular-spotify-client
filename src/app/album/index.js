@@ -4,7 +4,7 @@ class AlbumCtrl {
         $scope.query = $routeParams.albumId;
         $scope.data = {};
         $scope.tracks = [];
-        $scope.reproducir = (track) => { WebPlayerFactory.setAudio(track.preview_url) };
+        $scope.reproducir = (track) => { WebPlayerFactory.setAudio(Object.assign({}, track, { album: $scope.data })) };
         $scope.favoriteSong = track => {
             if (locker.has(track.id)) {
                 locker.forget(track.id);

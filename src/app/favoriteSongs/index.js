@@ -1,7 +1,7 @@
 import "./style.scss";
 class FavoriteSongsCtrl {
     constructor($scope, locker, WebPlayerFactory) {
-        $scope.reproducir = (track) => { WebPlayerFactory.setAudio(track.preview_url) };
+        $scope.reproducir = (track) => { WebPlayerFactory.setAudio(track) };
         $scope.removeTrack = (track) => {
             locker.forget(track.id);
             this.init($scope, locker);

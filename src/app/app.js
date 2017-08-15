@@ -11,11 +11,13 @@ import '../style/app.scss';
 import logoDirective from './logo';
 import breadcrumbDirective from './breadcrumb/breadcrumbDirective';
 import searchDirective from './buscador/buscadorDirective';
+import webPlayerDirective from './webPlayer/webPlayerDirective';
 import favoriteSongsDirective from './favoriteSongs/favoriteSongsDirective';
 
 //Controllers
 import FavoriteSongsCtrl from './favoriteSongs';
 import SearchCtrl from './buscador';
+import WebPlayerCtrl from './webPlayer';
 import SearchResultListCtrl from './searchResult';
 import ArtistaCtrl from './artista';
 import AlbumCtrl from './album';
@@ -38,11 +40,11 @@ class AppCtrl {
     }
 }
 
-//directives
+//Providers
 
 let SpotifyFactory = ($http) => {
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQDFVNHeoDJj-QzImJp6OcSP_ydsOtg5e07KTBAgVfuPBq5Cd1Q42W60OMpfS6yPIYxRdMmEzY-EWV2a-InC2EIMP_U6jLLk6VTR5ZZbYlEd8o0W3FaHPlwoHyquZKUb-iydnRRC1zXUhrA';
+    $http.defaults.headers.common.Authorization = 'Bearer BQAkoTBPe297TQapIqFIYwoTdCI5u424C-fEiPLmh4JpNouvmgMZGsqaHKyTvegIuBkJn8TISBH8sUb_4TlLaJuBVVfNDU2pH47S5Etmp01OvO84KEypBut0T02AkxE-3_wcxhd5gVPe7Qs';
     return {
         search: function(query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');
@@ -61,12 +63,26 @@ let SpotifyFactory = ($http) => {
 
 let WebPlayerFactory = () => {
     const AUDIO_PLAYER = document.getElementById('webPlayer');
+    let TRACK = null;
     return {
-        setAudio: (src) => {
+        setAudio: (song) => {
+            TRACK = song;
             AUDIO_PLAYER.pause();
             AUDIO_PLAYER.autoplay = true;
-            AUDIO_PLAYER.src = src;
+            AUDIO_PLAYER.src = song.preview_url;
             AUDIO_PLAYER.load();
+        },
+        getTrackInfo: () => {
+            return TRACK;
+        },
+        getAudioPlayer: () => {
+            return AUDIO_PLAYER;
+        },
+        pause: () => {
+            AUDIO_PLAYER.pause();
+        },
+        play: () => {
+            AUDIO_PLAYER.play();
         }
     }
 };
@@ -94,6 +110,37 @@ angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips', 'angular-locker'])
                 controller: 'AlbumCtrl',
             });
     }])
+    .filter('millSecondsToTimeString', function() {
+        return function(millseconds) {
+            var oneSecond = 1000;
+            var oneMinute = oneSecond * 60;
+            var oneHour = oneMinute * 60;
+            var oneDay = oneHour * 24;
+
+            var seconds = Math.floor((millseconds % oneMinute) / oneSecond);
+            var minutes = Math.floor((millseconds % oneHour) / oneMinute);
+            var hours = Math.floor((millseconds % oneDay) / oneHour);
+            var days = Math.floor(millseconds / oneDay);
+
+            var timeString = '';
+            // if (days !== 0) {
+            //     timeString += (days !== 1) ? (days + ' days ') : (days + ' day ');
+            // }
+            // if (hours !== 0) {
+            //     timeString += (hours !== 1) ? (hours + ' hours ') : (hours + ' hour ');
+            // }
+            if (minutes !== 0) {
+                timeString += minutes
+            } else {
+                timeString += '00';
+            }
+            if (seconds !== 0 || millseconds < 1000) {
+                timeString += ':' + (seconds < 10 ? '0' + seconds : seconds);
+            }
+
+            return timeString;
+        };
+    })
     .factory('SpotifyFactory', SpotifyFactory)
     .factory('WebPlayerFactory', WebPlayerFactory)
     .directive('app', app)
@@ -101,7 +148,9 @@ angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips', 'angular-locker'])
     .directive('appLogo', logoDirective)
     .directive('appSearch', searchDirective)
     .directive('appFavoriteSongs', favoriteSongsDirective)
+    .directive('webPlayer', webPlayerDirective)
     .controller('AppCtrl', AppCtrl)
+    .controller('webPlayerCtrl', WebPlayerCtrl)
     .controller('SearchCtrl', SearchCtrl)
     .controller('SearchResultCtrl', SearchResultListCtrl)
     .controller('FavoriteSongsCtrl', FavoriteSongsCtrl)
