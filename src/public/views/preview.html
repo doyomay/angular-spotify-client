@@ -2,7 +2,11 @@
     <figure class="preview--wrap" ng-switch on="song.type">
         <img class="preview--image" ng-switch-when="artist" ng-src="{{song.images[2].url}}" alt="{{song.album.name}}">
         <img class="preview--image" ng-switch-when="album" ng-src="{{song.images[2].url}}" alt="{{song.album.name}}">
-        <img class="preview--image" ng-switch-when="track" ng-click="reproducir(song)" ng-src="{{song.album.images[2].url}}" alt="{{song.album.name}}">
+        <div class="preview--image__container" ng-switch-when="track">
+            <button class="btn btn--play" ng-click="reproducir(song)"><i class="fa fa-play" aria-hidden="true"></i></button>
+            <button class="btn btn--delete" ng-click="removeTrack(song)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <img class="preview--image" ng-src="{{song.album.images[2].url}}" alt="{{song.album.name}}">
+        </div>
         <img class="preview--image" ng-switch-default ng-src="{{song.album.images[2].url}}" alt="{{song.album.name}}">
         <figcaption class="preview--descripcion">
             <a ng-switch-when="album" href="/album/{{song.id}}">
@@ -11,18 +15,19 @@
             <a ng-switch-when="artist" href="/artist/{{song.id}}">
                 <h3 class="preview--titulo"> {{song.name}}</h3>
             </a>
-            <!-- Descripciones alternas -->
             <dl class="preview__lista" ng-switch-when="album">
+                <!-- Descripciones alternas -->
                 <dd>{{song.artists[0].name}}</dd>
+                <!-- Fin Descripciones alternas -->
             </dl>
             <dl class="preview__lista" ng-switch-when="track">
+                <!-- Descripciones alternas -->
                 <dt>Artist:</dt>
-                <dd>{{song.artists[0].name}}</dd>
+                <dd><a href="/artist/{{song.artists[0].id}}">{{song.artists[0].name}}</a></dd>
                 <dt>Album:</dt>
-                <dd>{{song.album.name}}</dd>
+                <dd><a href="/album/{{song.album.id}}">{{song.album.name}}</a></dd>
+                <!-- Fin Descripciones alternas -->
             </dl>
-
-            <!-- Fin Descripciones alternas -->
         </figcaption>
     </figure>
 </div>
