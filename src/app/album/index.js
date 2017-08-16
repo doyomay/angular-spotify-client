@@ -1,9 +1,10 @@
 import './style.scss';
 class AlbumCtrl {
-    constructor($scope, $routeParams, SpotifyFactory, WebPlayerFactory, locker) {
+    constructor($scope, $routeParams, $q, SpotifyFactory, WebPlayerFactory, locker) {
         $scope.query = $routeParams.albumId;
         $scope.data = {};
         $scope.tracks = [];
+        $scope.discs = [];
         $scope.reproducir = (track) => { WebPlayerFactory.setAudio(Object.assign({}, track, { album: $scope.data })) };
         $scope.favoriteSong = track => {
             if (locker.has(track.id)) {
@@ -19,14 +20,33 @@ class AlbumCtrl {
             genres: [],
             albums: []
         };
+
         let spotifyTrasksLessPromise = SpotifyFactory.getTracksAlbum($scope.query);
         spotifyTrasksLessPromise.then((response) => {
-            console.log(response);
             $scope.data = response.data;
-            $scope.tracks = $scope.data.tracks;
-            console.log($scope.tracks);
-        })
-
+            let tracksFlag = $scope.tracks;
+            $scope.tracks = tracksFlag.concat(response.data.tracks.items);
+            const TOTAL_TRACKS = response.data.tracks.total;
+            const LIMIT_TRACKS = 50;
+            if (TOTAL_TRACKS > LIMIT_TRACKS) {
+                let deferred = $q.defer();
+                let urls = this.generatePromiseUrls($scope.query, TOTAL_TRACKS, LIMIT_TRACKS, SpotifyFactory);
+                $q.all(urls).then(data => {
+                    data.map(response => {
+                        tracksFlag = $scope.tracks;
+                        $scope.tracks = tracksFlag.concat(response.data.items);
+                    });
+                });
+            }
+        });
+    }
+    generatePromiseUrls(albumId, total, limit, SpotifyFactory) {
+        const TOTAL_URLS = Math.ceil(total / limit);
+        let urls = [];
+        for (let i = 1; i < TOTAL_URLS; i++) {
+            urls.push(SpotifyFactory.getNextUrl(`https://api.spotify.com/v1/albums/4oSQj7yRl9NzXqPSihwT38/tracks?offset=${(i*limit)+1}&limit=${limit}`));
+        }
+        return urls;
     }
 }
 

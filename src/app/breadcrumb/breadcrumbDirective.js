@@ -3,9 +3,7 @@ let breadcrumbDirective = () => {
     return {
         restrict: 'E',
         template: require('./index.html'),
-        link: (scope, element, attributes) => {
-            console.log(attributes);
-        },
+        link: (scope, element, attributes) => {},
         scope: {
             items: '='
         },

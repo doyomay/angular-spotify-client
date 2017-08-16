@@ -9,6 +9,7 @@ class SearchResultListCtrl {
         $scope.query = searchObject.q;
         let spotifyLessPromise = SpotifyFactory.search($scope.query);
         spotifyLessPromise.then((response) => {
+            console.log(response);
             $scope.songs = response.data.artists.items;
         })
     }

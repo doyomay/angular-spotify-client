@@ -44,7 +44,7 @@ class AppCtrl {
 
 let SpotifyFactory = ($http) => {
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQCYGd2byFkucZtScuI13-rehkv8HqlbIIyuH9vpeeZETjDz4nlGvv3gd2t-q7qrELZFU4I8A1Gm0XqUl_IJ7tXvJRe0lGNXtTCRYogwSHJ5VLxCWz3497A5fyBnSDrGKjN5FrSlR01AhGY';
+    $http.defaults.headers.common.Authorization = 'Bearer BQDTKN6s9eMOG2MXKjAXSuuRexqpY0nuUfDRHnvHLqgnl7g9Ra-EUpVBQis0oNqU5hki-sd6k7pFMcu6rZ3WHPkmRja3Y0hOQMlHAgRtG5b0ZfE_sKip8E0kxuEYy53uvM1vXNtbEuk-sFI';
     return {
         search: function(query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');
@@ -58,6 +58,9 @@ let SpotifyFactory = ($http) => {
         getTracksAlbum: function(idAlbum) {
             return $http.get(url + 'albums/' + idAlbum);
         },
+        getNextUrl: function(_url) {
+            return $http.get(_url);
+        }
     };
 };
 
@@ -112,17 +115,17 @@ angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips', 'angular-locker'])
     }])
     .filter('millSecondsToTimeString', function() {
         return function(millseconds) {
-            var oneSecond = 1000;
-            var oneMinute = oneSecond * 60;
-            var oneHour = oneMinute * 60;
-            var oneDay = oneHour * 24;
+            let oneSecond = 1000;
+            let oneMinute = oneSecond * 60;
+            let oneHour = oneMinute * 60;
+            let oneDay = oneHour * 24;
 
-            var seconds = Math.floor((millseconds % oneMinute) / oneSecond);
-            var minutes = Math.floor((millseconds % oneHour) / oneMinute);
-            var hours = Math.floor((millseconds % oneDay) / oneHour);
-            var days = Math.floor(millseconds / oneDay);
+            let seconds = Math.floor((millseconds % oneMinute) / oneSecond);
+            let minutes = Math.floor((millseconds % oneHour) / oneMinute);
+            let hours = Math.floor((millseconds % oneDay) / oneHour);
+            let days = Math.floor(millseconds / oneDay);
 
-            var timeString = '';
+            let timeString = '';
             // if (days !== 0) {
             //     timeString += (days !== 1) ? (days + ' days ') : (days + ' day ');
             // }

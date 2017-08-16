@@ -24,8 +24,8 @@
                     <h2>Disc 1</h2>
                 </header>
                 <ul class="album--listado">
-                    <li class="album__track flex flex--center" ng-repeat="track in tracks.items">
-                        <h2 class="album__track--title" ng-click="reproducir(track)">{{track.name}}</h2>
+                    <li class="album__track flex flex--center" ng-repeat="track in tracks track by $index">
+                        <h2 class="album__track--title" ng-click="reproducir(track)">{{$index +1 }} - {{track.name}}</h2>
                         <span class="album__track--start" ng-click="favoriteSong(track)" tooltips tooltip-template="Add favorites" tooltip-side="right">
                             <i class="fa fa-star" aria-hidden="true" ></i>
                         </span>
