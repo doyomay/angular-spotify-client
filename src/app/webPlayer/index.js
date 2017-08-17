@@ -11,8 +11,7 @@ class WebPlayerCtrl {
         const progressVolumen = document.getElementById("webPlayer_volumen");
         const WP = WebPlayerFactory.getAudioPlayer();
         $scope.currentVolumen = WP.volume;
-        //WP.addEventListener('play', () => {});
-        //WP.addEventListener('progress', () => { console.log('Pos avanzo') })
+        WP.addEventListener('progress', () => { console.log('Pos avanzo') })
         WP.addEventListener('emptied', () => {
             let track = WebPlayerFactory.getTrackInfo();
             progressAudio.value = 0;
@@ -36,7 +35,41 @@ class WebPlayerCtrl {
         WP.addEventListener('ended', () => { console.log('Pos termino') })
         WP.addEventListener('volumechange', () => {
             progressVolumen.value = WP.volume;
-        })
+        });
+
+        let listener = () => {
+            window.requestAnimationFrame(() => {
+                WP.currentTime = progressAudio.value;
+                $scope.duration = {
+                    init: progressAudio.value,
+                    end: 30000
+                };
+            });
+        };
+
+        progressAudio.addEventListener("mousedown", () => {
+            listener();
+            progressAudio.addEventListener("mousemove", listener);
+        });
+
+        progressAudio.addEventListener("mouseup", () => {
+            progressAudio.removeEventListener("mousemove", listener);
+        });
+
+        let listenerVolumen = () => {
+            window.requestAnimationFrame(() => {
+                WP.volume = progressVolumen.value;
+            });
+        };
+
+        progressVolumen.addEventListener("mousedown", () => {
+            listenerVolumen();
+            progressVolumen.addEventListener("mousemove", listenerVolumen);
+        });
+
+        progressVolumen.addEventListener("mouseup", () => {
+            progressVolumen.removeEventListener("mousemove", listenerVolumen);
+        });
 
         $scope.play = () => {
             WebPlayerFactory.play()

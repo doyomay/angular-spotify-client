@@ -17,7 +17,6 @@ class ArtistaCtrl {
         spotifyAlbumsLessPromise.then((response) => {
             $scope.artist.albums = response.data.items;
             $scope.songs = $scope.artist.albums;
-            console.log($scope.songs);
         })
     }
 }
