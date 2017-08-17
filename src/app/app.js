@@ -44,7 +44,7 @@ class AppCtrl {
 
 let SpotifyFactory = ($http) => {
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQBxPGm6HHNzmcXXv0AuyQB7lZMjbpdf1xym6iCjzDycHaQF1wVE1SiluJTaHDA2ft17TkppKzukN92AejEQjFAPL_SaIDybvplTrz3pw9rPouhW460Plm5eVYL3q9ZqEcPKI2kuewwueVI';
+    $http.defaults.headers.common.Authorization = 'Bearer BQDVgXvQGJRsKrSCMw_9Kd-QTr_jbfMUskZScjAFKotiWtBAUD6Pb8Q1wOeC2HUQMmmIjfXnx0XalLl_SvI4JUSFwZKaP0AOn0SEgXUTgaWKNmDWx3jbWHVYqJ4nU78vraebvOy9fC8O3dE';
     return {
         search: function(query) {
             return $http.get(url + 'search?q=' + query + '&type=artist');

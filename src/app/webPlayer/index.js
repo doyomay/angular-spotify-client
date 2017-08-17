@@ -47,14 +47,22 @@ class WebPlayerCtrl {
             });
         };
 
-        progressAudio.addEventListener("mousedown", () => {
-            listener();
-            progressAudio.addEventListener("mousemove", listener);
-        });
+        function addListenerMulti(el, s, fn) {
+            s.split(' ').forEach(e => el.addEventListener(e, fn, false));
+        }
 
-        progressAudio.addEventListener("mouseup", () => {
-            progressAudio.removeEventListener("mousemove", listener);
-        });
+        function rmListenerMulti(el, s, fn) {
+            s.split(' ').forEach(e => el.removeEventListener(e, fn, false));
+        }
+
+        addListenerMulti(progressAudio, 'mousedown ontouchstart', () => {
+            listener();
+            addListenerMulti(progressAudio, 'mousemove ontouchmove', listener);
+        })
+
+        addListenerMulti(progressAudio, 'mouseup ontouchend', () => {
+            rmListenerMulti(progressAudio, 'mousemove ontouchmove', listener);
+        })
 
         let listenerVolumen = () => {
             window.requestAnimationFrame(() => {

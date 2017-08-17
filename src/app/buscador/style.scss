@@ -22,3 +22,22 @@
         text-indent: 50px;
     }
 }
+
+.btn--buscador__mobile {
+    display: none;
+    border: none;
+    text-align: right;
+    background-color: transparent;
+}
+
+.rotate {
+    margin: 2px;
+    &.open-search {
+        i {
+            transition: .2s all ease;
+        }
+        >i {
+            transform: rotate(180deg);
+        }
+    }
+}

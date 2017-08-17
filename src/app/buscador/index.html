@@ -1,4 +1,8 @@
-<aside class="buscador" ng-controller="SearchCtrl">
+<button class="btn--buscador__mobile" ng-init="false" ng-click="enabled=!enabled">
+    <i class="fa fa-search" aria-hidden="true"></i>
+    <span class="rotate" ng-class="{'open-search':enabled}"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+</button>
+<aside class="buscador" ng-class="{'open-search':enabled}" ng-controller="SearchCtrl">
     <form class="buscador--form" ng-submit="buscador()">
         <button class="buscador--btn"><i class="fa fa-search" aria-hidden="true"></i></button>
         <input type="search" required data-ng-model="artista" name="q" id="" placeholder="{{placeholder}}" class="buscador--input">
