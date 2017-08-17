@@ -2,6 +2,9 @@ $bck-album-header:#505050;
 $padding-album: 7px;
 .album {
     width: 100%;
+    &:not(:last-child) {
+        margin-bottom: 1em;
+    }
     &--header {
         padding: $padding-album;
         background-color: $bck-album-header;

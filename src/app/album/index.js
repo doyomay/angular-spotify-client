@@ -26,6 +26,8 @@ class AlbumCtrl {
             $scope.data = response.data;
             let tracksFlag = $scope.tracks;
             $scope.tracks = tracksFlag.concat(response.data.tracks.items);
+            $scope.discs = this.generateDiscs($scope.tracks);
+
             const TOTAL_TRACKS = response.data.tracks.total;
             const LIMIT_TRACKS = 50;
             if (TOTAL_TRACKS > LIMIT_TRACKS) {
@@ -35,6 +37,7 @@ class AlbumCtrl {
                     data.map(response => {
                         tracksFlag = $scope.tracks;
                         $scope.tracks = tracksFlag.concat(response.data.items);
+                        $scope.discs = this.generateDiscs($scope.tracks);
                     });
                 });
             }
@@ -44,9 +47,19 @@ class AlbumCtrl {
         const TOTAL_URLS = Math.ceil(total / limit);
         let urls = [];
         for (let i = 1; i < TOTAL_URLS; i++) {
-            urls.push(SpotifyFactory.getNextUrl(`https://api.spotify.com/v1/albums/4oSQj7yRl9NzXqPSihwT38/tracks?offset=${(i*limit)+1}&limit=${limit}`));
+            urls.push(SpotifyFactory.getNextUrl(`https://api.spotify.com/v1/albums/4oSQj7yRl9NzXqPSihwT38/tracks?offset=${(i*limit)}&limit=${limit}`));
         }
         return urls;
+    }
+    generateDiscs(tracks) {
+        let flag = 1;
+        let discContainer = [];
+        for (let i = 0; i < tracks.length; i++) {
+            if (!discContainer[tracks[i].disc_number - 1])
+                discContainer[tracks[i].disc_number - 1] = [];
+            discContainer[tracks[i].disc_number - 1].push(tracks[i]);
+        }
+        return discContainer;
     }
 }
 

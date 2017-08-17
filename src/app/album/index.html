@@ -19,12 +19,12 @@
     </section>
     <section class="container">
         <div class="favorite-songs--container">
-            <article class="album">
+            <article class="album" ng-repeat="disc in discs track by $index">
                 <header class="album--header">
-                    <h2>Disc 1</h2>
+                    <h2>Disc {{$index +1 }}</h2>
                 </header>
                 <ul class="album--listado">
-                    <li class="album__track flex flex--center" ng-repeat="track in tracks track by $index">
+                    <li class="album__track flex flex--center" ng-repeat="track in disc">
                         <h2 class="album__track--title" ng-click="reproducir(track)">{{$index +1 }} - {{track.name}}</h2>
                         <span class="album__track--start" ng-click="favoriteSong(track)" tooltips tooltip-template="Add favorites" tooltip-side="right">
                             <i class="fa fa-star" aria-hidden="true" ></i>
