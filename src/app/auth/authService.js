@@ -1,4 +1,4 @@
-let authService = () => {
+let authService = ($rootScope) => {
     const CLIENT_ID = '562d461bfe894fbb8d2fd2cc10e9ad2d';
     const REDIRECT_URI = 'http://localhost:8080/callback';
 
@@ -34,6 +34,7 @@ let authService = () => {
             return token;
         },
         setAccessToken: (token, expires_in) => {
+            $rootScope.$broadcast('TOKEN_UPDATE');
             localStorage.setItem('pa_token', token);
             localStorage.setItem('pa_expires', (new Date()).getTime() + expires_in);
         },
