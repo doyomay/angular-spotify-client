@@ -22,6 +22,11 @@ import SearchResultListCtrl from './searchResult';
 import ArtistaCtrl from './artista';
 import AlbumCtrl from './album';
 
+//auth
+import authService from './auth/authService';
+import authCtrl from './auth'
+import authDirective from './auth/authDirective'
+
 let app = () => {
     return {
         template: require('./app.html'),
@@ -32,33 +37,32 @@ let app = () => {
 
 
 class AppCtrl {
-    constructor($scope) {
-        $scope.nombre = "";
-        $scope.hey = () => {
-            alert($scope.nombre);
-        }
-    }
+    constructor() {}
 }
 
 //Providers
 
-let SpotifyFactory = ($http) => {
+let SpotifyFactory = ($http, authService) => {
     let url = "https://api.spotify.com/v1/";
-    $http.defaults.headers.common.Authorization = 'Bearer BQDVgXvQGJRsKrSCMw_9Kd-QTr_jbfMUskZScjAFKotiWtBAUD6Pb8Q1wOeC2HUQMmmIjfXnx0XalLl_SvI4JUSFwZKaP0AOn0SEgXUTgaWKNmDWx3jbWHVYqJ4nU78vraebvOy9fC8O3dE';
+    const TOKEN = authService.getAccessToken();
+    $http.defaults.headers.common.Authorization = `Bearer ${TOKEN}`;
     return {
-        search: function(query) {
+        getUser: () => {
+            return $http.get(url + 'me');
+        },
+        search: query => {
             return $http.get(url + 'search?q=' + query + '&type=artist');
         },
-        getArtist: function(idArtist) {
+        getArtist: idArtist => {
             return $http.get(url + 'artists/' + idArtist);
         },
-        getAlbumsArtist: function(idArtist) {
+        getAlbumsArtist: idArtist => {
             return $http.get(url + 'artists/' + idArtist + '/albums');
         },
-        getTracksAlbum: function(idAlbum) {
+        getTracksAlbum: idAlbum => {
             return $http.get(url + 'albums/' + idAlbum);
         },
-        getNextUrl: function(_url) {
+        getNextUrl: _url => {
             return $http.get(_url);
         }
     };
@@ -111,6 +115,11 @@ angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips', 'angular-locker'])
             .when("/album/:albumId", {
                 template: require('./album/index.html'),
                 controller: 'AlbumCtrl',
+            })
+            .when("/callback", {
+                template: require('./auth/index.html'),
+                controller: 'authCtrl',
+
             });
     }])
     .filter('millSecondsToTimeString', function() {
@@ -146,13 +155,16 @@ angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips', 'angular-locker'])
     })
     .factory('SpotifyFactory', SpotifyFactory)
     .factory('WebPlayerFactory', WebPlayerFactory)
+    .factory('authService', authService)
     .directive('app', app)
     .directive('breadcrumb', breadcrumbDirective)
     .directive('appLogo', logoDirective)
     .directive('appSearch', searchDirective)
     .directive('appFavoriteSongs', favoriteSongsDirective)
     .directive('webPlayer', webPlayerDirective)
+    .directive('appAuth', authDirective)
     .controller('AppCtrl', AppCtrl)
+    .controller('authCtrl', authCtrl)
     .controller('webPlayerCtrl', WebPlayerCtrl)
     .controller('SearchCtrl', SearchCtrl)
     .controller('SearchResultCtrl', SearchResultListCtrl)
