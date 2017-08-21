@@ -1,4 +1,4 @@
-<div class="preview" ng-repeat="song in songs">
+<div class="preview" ng-repeat="song in songs track by $index">
     <figure class="preview--wrap" ng-switch on="song.type">
         <img class="preview--image" ng-switch-when="artist" ng-src="{{song.images[2].url}}" alt="{{song.album.name}}">
         <img class="preview--image" ng-switch-when="album" ng-src="{{song.images[2].url}}" alt="{{song.album.name}}">

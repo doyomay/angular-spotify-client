@@ -34,9 +34,9 @@ let authService = ($rootScope) => {
             return token;
         },
         setAccessToken: (token, expires_in) => {
-            $rootScope.$broadcast('TOKEN_UPDATE');
             localStorage.setItem('pa_token', token);
             localStorage.setItem('pa_expires', (new Date()).getTime() + expires_in);
+            $rootScope.$broadcast('TOKEN_UPDATE');
         },
         getUsername: () => {
             let username = localStorage.getItem('pa_username', '');

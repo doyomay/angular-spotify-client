@@ -108,6 +108,17 @@ let WebPlayerFactory = () => {
     }
 };
 
+
+let ScrollInfiniteFactory = ($rootScope, $window) => {
+    let detectBottom = () => {
+        $window.addEventListener('scroll', () => {
+            if (($window.innerHeight + $window.scrollY) >= document.body.offsetHeight) {
+                $rootScope.$broadcast('WINDOW_BOTTOM');
+            }
+        })
+    }
+    return { detectBottom };
+}
 const MODULE_NAME = 'app';
 
 angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips', 'angular-locker'])
@@ -170,6 +181,7 @@ angular.module(MODULE_NAME, ['ngRoute', '720kb.tooltips', 'angular-locker'])
     .factory('SpotifyFactory', SpotifyFactory)
     .factory('WebPlayerFactory', WebPlayerFactory)
     .factory('authService', authService)
+    .factory('ScrollInfiniteService', ScrollInfiniteFactory)
     .directive('app', app)
     .directive('breadcrumb', breadcrumbDirective)
     .directive('appLogo', logoDirective)
