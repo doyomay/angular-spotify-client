@@ -109,12 +109,15 @@ let WebPlayerFactory = () => {
 };
 
 
-let ScrollInfiniteFactory = ($rootScope, $window) => {
+let ScrollInfiniteFactory = ($rootScope, $window, $interval) => {
     let detectBottom = () => {
         $window.addEventListener('scroll', () => {
-            if (($window.innerHeight + $window.scrollY) >= document.body.offsetHeight) {
-                $rootScope.$broadcast('WINDOW_BOTTOM');
-            }
+            $interval(() => {
+                if (($window.innerHeight + $window.scrollY) >= document.body.offsetHeight) {
+                    $rootScope.$broadcast('WINDOW_BOTTOM');
+                }
+            }, 3000)
+
         })
     }
     return { detectBottom };
