@@ -111,16 +111,18 @@ let WebPlayerFactory = () => {
 
 let ScrollInfiniteFactory = ($rootScope, $window, $interval) => {
     let detectBottom = () => {
-        $window.addEventListener('scroll', () => {
-            $interval(() => {
-                if (($window.innerHeight + $window.scrollY) >= document.body.offsetHeight) {
-                    $rootScope.$broadcast('WINDOW_BOTTOM');
-                }
-            }, 3000)
-
-        })
+        if (($window.innerHeight + $window.scrollY) >= document.body.offsetHeight) {
+            $rootScope.$broadcast('WINDOW_BOTTOM');
+        }
     }
-    return { detectBottom };
+    let initEvent = () => {
+        $window.addEventListener('scroll', detectBottom);
+    }
+    let stopEvent = () => {
+        $window.removeEventListener('scroll', detectBottom);
+    }
+
+    return { initEvent, stopEvent };
 }
 const MODULE_NAME = 'app';
 

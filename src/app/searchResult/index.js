@@ -6,23 +6,24 @@ class SearchResultListCtrl {
         $scope.nombre = "Este es un nombre";
         $scope.placeholder = "prueba";
         $scope.next = null;
-        ScrollInfiniteService.detectBottom();
         var searchObject = $location.search();
         $scope.query = searchObject.q;
         let spotifyLessPromise = SpotifyFactory.search($scope.query);
         spotifyLessPromise.then((response) => {
-            this.addResult($scope, response);
+            this.addResult($scope, response, ScrollInfiniteService);
         })
 
         $rootScope.$on('WINDOW_BOTTOM', () => {
+            ScrollInfiniteService.stopEvent();
             if ($scope.next != null) {
                 SpotifyFactory.getNextUrl($scope.next).then((response) => {
-                    this.addResult($scope, response)
+                    this.addResult($scope, response, ScrollInfiniteService)
                 });
             }
         });
     }
-    addResult($scope, response) {
+    addResult($scope, response, ScrollInfiniteService) {
+        ScrollInfiniteService.initEvent();
         $scope.songs = $scope.songs.concat(response.data.artists.items);
         $scope.next = response.data.artists.next;
     }

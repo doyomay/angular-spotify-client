@@ -11,28 +11,29 @@ class ArtistaCtrl {
         $scope.albums = [];
         $scope.pages = 0;
         $scope.next = null;
-        ScrollInfiniteService.detectBottom();
         let spotifyLessPromise = SpotifyFactory.getArtist($scope.query);
         spotifyLessPromise.then((response) => {
             $scope.artist = response.data;
         });
         let spotifyAlbumsLessPromise = SpotifyFactory.getAlbumsArtist($scope.query);
         spotifyAlbumsLessPromise.then((response) => {
-            this.addAlbums($scope, response);
-        })
+            this.addAlbums($scope, response, ScrollInfiniteService);
+        });
         $rootScope.$on('WINDOW_BOTTOM', () => {
+            ScrollInfiniteService.stopEvent();
             if ($scope.next != null) {
                 SpotifyFactory.getNextUrl($scope.next).then((response) => {
-                    this.addAlbums($scope, response)
+                    this.addAlbums($scope, response, ScrollInfiniteService)
                 });
             }
         });
     }
-    addAlbums($scope, response) {
+    addAlbums($scope, response, ScrollInfiniteService) {
         $scope.pages++;
         $scope.albums = $scope.albums.concat(response.data.items);
         $scope.songs = $scope.albums;
         $scope.next = response.data.next;
+        ScrollInfiniteService.initEvent();
     }
 }
 
