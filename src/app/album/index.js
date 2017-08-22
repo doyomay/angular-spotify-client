@@ -42,7 +42,11 @@ class AlbumCtrl {
                 });
             }
         });
+        $scope.inFavoriteSongs = (track) => {
+            return locker.has(track.id)
+        }
     }
+
     generatePromiseUrls(albumId, total, limit, SpotifyFactory) {
         const TOTAL_URLS = Math.ceil(total / limit);
         let urls = [];
