@@ -27,7 +27,7 @@ class AlbumCtrl {
             let tracksFlag = $scope.tracks;
             $scope.tracks = tracksFlag.concat(response.data.tracks.items);
             $scope.discs = this.generateDiscs($scope.tracks);
-
+            console.log($scope.discs);
             const TOTAL_TRACKS = response.data.tracks.total;
             const LIMIT_TRACKS = 50;
             if (TOTAL_TRACKS > LIMIT_TRACKS) {
@@ -45,6 +45,16 @@ class AlbumCtrl {
         $scope.inFavoriteSongs = (track) => {
             return locker.has(track.id)
         }
+
+        $scope.order = null;
+        $scope.orders = [null, '+duration_ms', '-duration_ms'];
+        $scope.postionOrder = 0;
+        $scope.orderBy = () => {
+            $scope.postionOrder++;
+            $scope.postionOrder = $scope.postionOrder >= $scope.orders.length ? 0 : $scope.postionOrder;
+            $scope.order = $scope.orders[$scope.postionOrder];
+        }
+
     }
 
     generatePromiseUrls(albumId, total, limit, SpotifyFactory) {

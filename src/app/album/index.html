@@ -20,12 +20,12 @@
     <section class="container">
         <div class="favorite-songs--container">
             <article class="album" ng-repeat="disc in discs track by $index">
-                <header class="album--header">
-                    <h2>Disc {{$index +1 }}</h2>
+                <header class="album--header flex flex--center">
+                    <h2>Disc {{$index +1 }}</h2> <button ng-click="orderBy()"><i class="fa" ng-class="{'fa-sort': postionOrder == 0,'fa-caret-up': postionOrder == 1,'fa-caret-down': postionOrder == 2,}" aria-hidden="true"></i></button>
                 </header>
                 <ul class="album--listado">
-                    <li class="album__track flex flex--center" ng-repeat="track in disc">
-                        <h2 class="album__track--title" ng-click="reproducir(track)">{{$index +1 }} - {{track.name}}</h2>
+                    <li class="album__track flex flex--center" ng-repeat="track in disc | orderBy:order">
+                        <h2 class="album__track--title" ng-click="reproducir(track)">{{track.name}} - <i>{{track.duration_ms | millSecondsToTimeString}}</i></h2>
                         <span class="album__track--start" ng-class="{'active' : inFavoriteSongs(track)}" ng-click="favoriteSong(track)" tooltips tooltip-template="{{inFavoriteSongs(track) ? 'Remove' : 'Add'}} favorites" tooltip-smart="true" tooltip-side="right">
                             <i class="fa fa-star" aria-hidden="true" ></i>
                         </span>
